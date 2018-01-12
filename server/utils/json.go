@@ -31,11 +31,11 @@ func (this *Resp)RespSucc(data map[string]interface{})  {
 	this.w.Write(jsonBytes)
 }
 
-func (this *Resp) RespError(data map[string]interface{}) {
+func (this *Resp) RespError(code int, msg interface{}) {
 	this.w.Header()["Content-Type"] = jsonContentType
 	ret := map[string]interface{}{
-		"code": -200,
-		"data": data,
+		"code": code,
+		"msg": msg,
 	}
 
 	jsonBytes, err := json.Marshal(ret)
