@@ -75,11 +75,7 @@ func (s *Server) Transaction(w http.ResponseWriter, r *http.Request) {
 		Nonce:    98384,
 	}
 
-	p,err := t.MarshalJSON()
-	if err != nil {
-		panic(err)
-	}
-
+	p:= t.ConverParam()
 	fmt.Println("p------>", p)
 	ret,err := s.Client.Call("eth_sendTransaction", p)
 	//ret,err := s.Client.EthSendTransaction(t)
