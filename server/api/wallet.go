@@ -63,19 +63,25 @@ func (s *Server) Transaction(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
+	//1000000000000000000 = 1 ETH
 	vx := int64(value_float*1000000000000000000)
 	t := ethrpc.T{
 		From:     from,
 		To:       to,
 		Gas:      24900,
-		GasPrice: big.NewInt(5000000000),
-		//1000000000000000000 = 1 ETH
-		Value:    big.NewInt(vx), // 1 ETH
+		GasPrice:  big.NewInt(5000000000),
+		Value:    big.NewInt(vx),
 		Data:     "thisisjohn",
 		Nonce:    98384,
 	}
 
-	ret,err := s.Client.EthSendTransaction(t)
+	p,err := t.MarshalJSON()
+	if err != nil {
+		panic(err)
+	}
+
+	ret,err := s.Client.Call("eth_sendTransaction", p)
+	//ret,err := s.Client.EthSendTransaction(t)
 	if err != nil {
 		panic(err)
 	}
