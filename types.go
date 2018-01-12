@@ -59,9 +59,9 @@ func (t T) MarshalJSON() ([]byte, error) {
 	if t.Data != "" {
 		params["data"] = t.Data
 	}
-	if t.Nonce > 0 {
+/*	if t.Nonce > 0 {
 		params["nonce"] = IntToHex(t.Nonce)
-	}
+	}*/
 
 	return json.Marshal(params)
 }
@@ -85,9 +85,9 @@ func (t T) ConverParam() (map[string]interface{}) {
 	if t.Data != "" {
 		params["data"] = t.Data
 	}
-	if t.Nonce > 0 {
+/*	if t.Nonce > 0 {
 		params["nonce"] = IntToHex(t.Nonce)
-	}
+	}*/
 
 	return params
 }
