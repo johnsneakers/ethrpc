@@ -31,6 +31,21 @@ func (this *Resp)RespSucc(data map[string]interface{})  {
 	this.w.Write(jsonBytes)
 }
 
+func (this *Resp) RespError(data map[string]interface{}) {
+	this.w.Header()["Content-Type"] = jsonContentType
+	ret := map[string]interface{}{
+		"code": -200,
+		"data": data,
+	}
+
+	jsonBytes, err := json.Marshal(ret)
+	if err != nil {
+		panic(err)
+	}
+
+	this.w.Write(jsonBytes)
+}
+
 func Json(obj interface{}, w http.ResponseWriter) string {
 	w.Header()["Content-Type"] = jsonContentType
 
