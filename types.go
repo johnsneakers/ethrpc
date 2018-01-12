@@ -66,6 +66,33 @@ func (t T) MarshalJSON() ([]byte, error) {
 	return json.Marshal(params)
 }
 
+func (t T) ConverParam() (map[string]interface{}) {
+	params := map[string]interface{}{
+		"from": t.From,
+	}
+	if t.To != "" {
+		params["to"] = t.To
+	}
+	if t.Gas > 0 {
+		params["gas"] = IntToHex(t.Gas)
+	}
+	if t.GasPrice != nil {
+		params["gasPrice"] = BigToHex(*t.GasPrice)
+	}
+	if t.Value != nil {
+		params["value"] = BigToHex(*t.Value)
+	}
+	if t.Data != "" {
+		params["data"] = t.Data
+	}
+	if t.Nonce > 0 {
+		params["nonce"] = IntToHex(t.Nonce)
+	}
+
+	return params
+}
+
+
 // Transaction - transaction object
 type Transaction struct {
 	Hash             string
