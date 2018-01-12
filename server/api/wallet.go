@@ -80,7 +80,7 @@ func (s *Server) Transaction(w http.ResponseWriter, r *http.Request) {
 	p := t.ConverParam()
 	ps.P = p
 	ps.Pwd = "johnsneakers"
-	ret,err := s.Client.Call("personal_sendTransaction", p)
+	ret,err := s.Client.Call("personal_sendTransaction", ps)
 	if err != nil {
 		panic(err)
 	}
