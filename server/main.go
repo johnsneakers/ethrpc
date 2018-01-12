@@ -19,7 +19,8 @@ func main() {
 	s := new(api.Server)
 	s.Client = ethrpc.NewEthRPC("http://127.0.0.1:8545")
 	common := alice.New(s.RecoverHandler)
-	http.Handle("/account/create", common.ThenFunc(s.CreateWallet))
+	http.Handle("/account/create", common.ThenFunc(s.CreateAccount))
+	http.Handle("/account/balance", common.ThenFunc(s.Balance))
 	http.Handle("/debug", common.ThenFunc(s.VersionCheck))
 	RunHttpServer(servicesConf)
 }

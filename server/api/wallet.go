@@ -22,7 +22,7 @@ func (s *Server) Balance(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	
+
 	fmt.Println("余额:", ret)
 }
 
