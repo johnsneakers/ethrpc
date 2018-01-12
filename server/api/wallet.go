@@ -71,7 +71,7 @@ func (s *Server) Transaction(w http.ResponseWriter, r *http.Request) {
 		Gas:      24900,
 		GasPrice:  big.NewInt(5000000000),
 		Value:    big.NewInt(vx),
-		Data:     "thisisjohn",
+		Data:     "0x61626364656667",
 		Nonce:    98384,
 	}
 
