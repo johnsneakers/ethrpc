@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"net/http"
 	"ethrpc/server/utils"
+	"math/big"
+	"ethrpc"
+	"strconv"
 )
 
 
@@ -15,6 +18,7 @@ func (s *Server) VersionCheck(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("version:", str)
 }
+
 
 func (s *Server) Balance(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
@@ -40,5 +44,47 @@ func (s *Server) CreateAccount(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	fmt.Println("结果:", ret)
+	data := map[string]interface{}{
+		"address":ret,
+	}
+
+	utils.NewResp(w).RespSucc(data)
+	return
+}
+
+
+func (s *Server) Transaction(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	from := r.Form.Get("from")
+	to := r.Form.Get("to")
+	v := r.Form.Get("value")
+	value_float,err := strconv.ParseFloat(v,10)
+	if err != nil {
+		panic(err)
+	}
+
+	vx := int64(value_float*1000000000000000000)
+	t := ethrpc.T{
+		From:     from,
+		To:       to,
+		Gas:      24900,
+		GasPrice: big.NewInt(5000000000),
+		//1000000000000000000 = 1 ETH
+		Value:    big.NewInt(vx), // 1 ETH
+		Data:     "thisisjohn",
+		Nonce:    98384,
+	}
+
+	ret,err := s.Client.EthSendTransaction(t)
+	if err != nil {
+		panic(err)
+	}
+
+	data := map[string]interface{}{
+		"ret":ret,
+	}
+
+	utils.NewResp(w).RespSucc(data)
+
+
 }
