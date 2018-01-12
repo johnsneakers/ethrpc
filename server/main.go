@@ -21,6 +21,7 @@ func main() {
 	common := alice.New(s.RecoverHandler)
 	http.Handle("/account/create", common.ThenFunc(s.CreateAccount))
 	http.Handle("/account/balance", common.ThenFunc(s.Balance))
+	http.Handle("/account/trans", common.ThenFunc(s.Transaction))
 	http.Handle("/debug", common.ThenFunc(s.VersionCheck))
 	RunHttpServer(servicesConf)
 }
