@@ -74,12 +74,7 @@ func (s *Server) Transaction(w http.ResponseWriter, r *http.Request) {
 		Data:     "0x61626364656667",
 	}
 
-
-	ps := ethrpc.PersonalCall{}
-
 	p := t.ConverParam()
-	ps.P = p
-	ps.Pwd = "johnsneakers"
 	ret,err := s.Client.Call("personal_sendTransaction", p,"johnsneakers")
 	if err != nil {
 		panic(err)

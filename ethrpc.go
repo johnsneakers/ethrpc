@@ -62,10 +62,6 @@ func (rpc *EthRPC) call(method string, target interface{}, params ...interface{}
 	return nil
 }
 
-type PersonalCall struct {
-	P map[string]interface{}
-	Pwd string
-}
 
 // Call returns raw response of method call
 func (rpc *EthRPC) Call(method string, params ...interface{}) (json.RawMessage, error) {
