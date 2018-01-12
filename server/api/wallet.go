@@ -20,7 +20,7 @@ func (s *Server) Balance(w http.ResponseWriter, r *http.Request) {
 	address := r.Form.Get("address")
 	ret,err := s.Client.EthGetBalance(address,"latest")
 	if err != nil {
-		return
+		panic(err)
 	}
 
 	fmt.Println("余额:", ret)
