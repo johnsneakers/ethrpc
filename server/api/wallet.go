@@ -23,7 +23,7 @@ func (s *Server) Balance(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	fmt.Println("余额:", ret)
+	fmt.Println("余额:", ret.String())
 }
 
 func (s *Server) CreateAccount(w http.ResponseWriter, r *http.Request) {
