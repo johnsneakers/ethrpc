@@ -80,6 +80,7 @@ func (s *Server) Transaction(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
+	fmt.Println("p------>", p)
 	ret,err := s.Client.Call("eth_sendTransaction", p)
 	//ret,err := s.Client.EthSendTransaction(t)
 	if err != nil {
