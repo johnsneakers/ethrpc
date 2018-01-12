@@ -15,8 +15,17 @@ func (s *Server) VersionCheck(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("version:", str)
 }
 
+func (s *Server) Balance(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	address := r.Form.Get("address")
+	ret,err := s.Client.EthGetBalance(address,"latest")
+	if err != nil {
+		return
+	}
+	
+	fmt.Println("余额:", ret)
+}
 
-
-func (s *Server) CreateWallet(w http.ResponseWriter, r *http.Request) {
+func (s *Server) CreateAccount(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("api..")
 }
