@@ -27,11 +27,18 @@ func (s *Server) Balance(w http.ResponseWriter, r *http.Request) {
 	data := map[string]interface{}{
 		"balance":ret.String(),
 	}
-	
+
 	utils.NewResp(w).RespSucc(data)
 	return
 }
 
 func (s *Server) CreateAccount(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("api..")
+	r.ParseForm()
+	pwd := r.Form.Get("pwd")
+	ret,err := s.Client.Personal_newAccount(pwd)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("结果:", ret)
 }
