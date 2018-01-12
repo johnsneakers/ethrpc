@@ -78,7 +78,7 @@ func (s *Server) Transaction(w http.ResponseWriter, r *http.Request) {
 	p := t.ConverParam()
 	parmeters = append(parmeters,p)
 	parmeters =  append(parmeters,"johnsneakers")
-	ret,err := s.Client.Call("personal_sendTransaction", p)
+	ret,err := s.Client.Call("personal_sendTransaction", parmeters)
 	if err != nil {
 		panic(err)
 	}
