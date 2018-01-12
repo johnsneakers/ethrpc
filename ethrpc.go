@@ -76,6 +76,8 @@ func (rpc *EthRPC) Call(method string, params ...interface{}) (json.RawMessage, 
 		return nil, err
 	}
 
+
+	fmt.Println("发送:", string(body))
 	response, err := http.Post(rpc.url, "application/json", bytes.NewBuffer(body))
 	if response != nil {
 		defer response.Body.Close()
