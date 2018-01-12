@@ -8,6 +8,29 @@ import (
 
 var jsonContentType = []string{"application/json; charset=utf-8"}
 
+type Resp struct {
+	w http.ResponseWriter
+}
+
+func NewResp(w http.ResponseWriter) *Resp {
+	return &Resp{w:w}
+}
+
+func (this *Resp)RespSucc(data map[string]interface{})  {
+	this.w.Header()["Content-Type"] = jsonContentType
+	ret := map[string]interface{}{
+		"code": 1,
+		"data": data,
+	}
+
+	jsonBytes, err := json.Marshal(ret)
+	if err != nil {
+		panic(err)
+	}
+
+	this.w.Write(jsonBytes)
+}
+
 func Json(obj interface{}, w http.ResponseWriter) string {
 	w.Header()["Content-Type"] = jsonContentType
 

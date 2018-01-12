@@ -3,6 +3,7 @@ package api
 import (
 	"fmt"
 	"net/http"
+	"ethrpc/server/utils"
 )
 
 
@@ -23,7 +24,12 @@ func (s *Server) Balance(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	fmt.Println("余额:", ret.String())
+	data := map[string]interface{}{
+		"balance":ret.String(),
+	}
+	
+	utils.NewResp(w).RespSucc(data)
+	return
 }
 
 func (s *Server) CreateAccount(w http.ResponseWriter, r *http.Request) {
