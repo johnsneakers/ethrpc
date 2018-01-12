@@ -36,7 +36,7 @@ type T struct {
 	GasPrice *big.Int
 	Value    *big.Int
 	Data     string
-	Nonce    int
+	//Nonce    int
 }
 
 // MarshalJSON implements the json.Unmarshaler interface.
