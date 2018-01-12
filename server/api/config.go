@@ -6,11 +6,12 @@ import (
 	"ethrpc/server/proto"
 	"ethrpc/server/errorx"
 	"ethrpc/server/utils"
+	"ethrpc"
 )
 
 type Server struct {
 	Conf     *proto.Conf
-
+	Client *ethrpc.EthRPC
 }
 
 func (s *Server) RecoverHandler(n http.Handler) http.Handler {

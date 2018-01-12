@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"github.com/justinas/alice"
 	"ethrpc/server/api"
+	"ethrpc"
 )
 
 func main() {
@@ -16,8 +17,10 @@ func main() {
 	}
 
 	s := new(api.Server)
+	s.Client = ethrpc.NewEthRPC("http://127.0.0.1:8545")
 	common := alice.New(s.RecoverHandler)
 	http.Handle("/wallet/create", common.ThenFunc(s.CreateWallet))
+	http.Handle("/debug", common.ThenFunc(s.VersionCheck))
 	RunHttpServer(servicesConf)
 }
 
