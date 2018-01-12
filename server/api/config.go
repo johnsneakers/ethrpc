@@ -26,8 +26,7 @@ func (s *Server) RecoverHandler(n http.Handler) http.Handler {
 					w.Write(j)
 					return
 				default:
-					panic(err)
-					utils.Json(map[string]int{"ret": -500}, w)
+					utils.Json(map[string]interface{}{"code": -500, "msg":err}, w)
 					return
 				}
 			}
